@@ -1,9 +1,9 @@
-name: CI/CD Docker
+name: CI - Test
 
 on:
   pull_request:
     branches:
-      - master, dev
+      - [master, dev]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/trading
