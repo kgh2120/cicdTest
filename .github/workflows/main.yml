@@ -2,7 +2,11 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
+  pull_request:
+    branches: 
+      - master
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/trading
@@ -52,6 +56,18 @@ jobs:
           file: ./Dockerfile	# 빌드할 Dockerfile이 있는 디렉토리
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:latest
+          
+      - name: Slack Notify
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2.1.0
+        env:
+          SLACK_CHANNEL: group-dev
+          SLACK_COLOR: '#FF2D00'
+          SLACK_USERNAME: 'Github Action'
+          SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+          SLACK_TITLE: Build Failure - ${{ github.event.pull_request.title }}
+          SLACK_MESSAGE: PR Url - ${{ github.event.pull_request.url }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   deploy:
     needs: build
