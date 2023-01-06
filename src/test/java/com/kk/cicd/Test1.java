@@ -10,7 +10,7 @@ class Test1 {
         int a = 10;
         int b = 20;
 
-        Assertions.assertThat(20).isSameAs(a+b);
+        Assertions.assertThat(30).isSameAs(a+b);
     }
 
 }
