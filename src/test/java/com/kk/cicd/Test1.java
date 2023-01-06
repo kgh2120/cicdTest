@@ -13,4 +13,11 @@ class Test1 {
         Assertions.assertThat(30).isSameAs(a+b);
     }
 
+    @Test
+    void minus(){
+        int a = 10;
+        int b = 20;
+
+        Assertions.assertThat(10).isSameAs(b-a);
+    }
 }
