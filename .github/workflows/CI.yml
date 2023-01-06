@@ -2,8 +2,7 @@ name: CI - Test
 
 on:
   pull_request:
-    branches:
-      - ["master", "dev"]
+    branches: [master, dev]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/trading
